@@ -4,7 +4,7 @@
   "storage": "rethinkdb",
   "rethinkdb": {
     "host": "localhost",
-    "db": "eigengraph"
+    "db": "guide"
   },
   "cassandra": {
     "contactPoints": [
@@ -219,7 +219,27 @@
       },
       "edges": {
         "roles": {
-          "contains": [],
+          "contains": ["customer_role", "admin_role"],
+          "GET": "self"
+        },
+        "posts": {
+          "contains": ["post"],
+          "GET": "self",
+          "POST": "self",
+          "DELETE": "self"
+        },
+        "timeline": {
+          "contains": ["post"],
+          "GET": "self"
+        },
+        "follows": {
+          "contains": ["user"],
+          "GET": "self",
+          "POST": "self",
+          "DELETE": "self"
+        },
+        "followers": {
+          "contains": ["user"],
           "GET": "self"
         }
       }
@@ -414,8 +434,103 @@
         }
       }
     },
+    "customer_role": {
+      "code": "10",
+      "GET": "self",
+      "fields": {
+        "user": {
+          "type": "object_id",
+          "object_types": ["user"],
+          "required": true
+        }
+      }
+    },
+    "admin_role": {
+      "code": "11",
+      "GET": "self",
+      "fields": {
+        "user": {
+          "type": "object_id",
+          "object_types": ["user"],
+          "required": true
+        }
+      },
+      "edges": {
+        "offending_posts": {
+          "contains": ["post"],
+          "GET": "self",
+          "DELETE": "self"
+        }
+      }
+    },
+    "post": {
+      "code": "12",
+      "GET": "any",
+      "PUT": "self",
+      "DELETE": "self",
+      "fields": {
+        "creator": {
+          "type": "object_id",
+          "object_types": ["user"],
+          "required": true,
+          "auto_value": "req.user"
+        },
+        "image": {
+          "type": "object_id",
+          "object_types": ["file"],
+          "required": true,
+          "edit_mode": "NE"
+        },
+        "desc": {
+          "type": "string",
+          "required": true,
+          "edit_mode": "E",
+          "min": 2,
+          "max": 4096
+        }
+      },
+      "edges": {
+        "comments": {
+          "contains": ["comment"],
+          "GET": "any",
+          "POST": "registered_user"
+        },
+        "offended": {
+          "contains": ["user"],
+          "GET": "admin_role",
+          "POST": "registered_user"
+        }
+      }
+    },
+    "comment": {
+      "code": "13",
+      "GET": "any",
+      "PUT": "self",
+      "DELETE": "self",
+      "fields": {
+        "creator": {
+          "type": "object_id",
+          "object_types": ["user"],
+          "required": true,
+          "auto_value": "req.user"
+        },
+        "post": {
+          "type": "object_id",
+          "object_types": ["post"],
+          "required": true,
+          "edit_mode": "NE"
+        },
+        "text": {
+          "type": "string",
+          "required": true,
+          "edit_mode": "E",
+          "min": 2,
+          "max": 2048
+        }
+      }
+    },
     "objects": {
-      "secret_organization": ""
+      "secret_organization": "73728adc-5fd1-479f-b137-340eb4ae6969-09"
     },
     "pagination": {
       "default_count": 25,
