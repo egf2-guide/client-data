@@ -535,7 +535,7 @@
           "type": "object_id",
           "object_types": ["post"],
           "required": true,
-          "edit_mode": "NE"
+          "auto_value": "src.id"
         },
         "text": {
           "type": "string",
