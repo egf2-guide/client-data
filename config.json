@@ -197,7 +197,7 @@
     },
     "user": {
       "code": "03",
-      "GET": "self",
+      "GET": "any",
       "PUT": "self",
       "fields": {
         "name": {
