@@ -248,7 +248,7 @@
         "follows": {
           "contains": ["user"],
           "GET": "self",
-          "POST": "self",
+          "LINK": "self",
           "DELETE": "self"
         },
         "followers": {
