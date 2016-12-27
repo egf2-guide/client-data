@@ -236,7 +236,7 @@
         },
         "posts": {
           "contains": ["post"],
-          "GET": "self",
+          "GET": "any",
           "POST": "self",
           "DELETE": "self"
         },
