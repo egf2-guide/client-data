@@ -237,8 +237,7 @@
         "posts": {
           "contains": ["post"],
           "GET": "any",
-          "POST": "self",
-          "DELETE": "self"
+          "POST": "self"
         },
         "timeline": {
           "contains": ["post"],
@@ -483,7 +482,6 @@
       "code": "12",
       "GET": "any",
       "PUT": "self",
-      "DELETE": "self",
       "fields": {
         "creator": {
           "type": "object_id",
@@ -509,7 +507,8 @@
         "comments": {
           "contains": ["comment"],
           "GET": "any",
-          "POST": "registered_user"
+          "POST": "registered_user",
+          "DELETE": "self"
         },
         "offended": {
           "contains": ["user"],
@@ -522,7 +521,6 @@
       "code": "13",
       "GET": "any",
       "PUT": "self",
-      "DELETE": "self",
       "fields": {
         "creator": {
           "type": "object_id",
