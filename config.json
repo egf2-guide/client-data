@@ -512,8 +512,8 @@
         },
         "offended": {
           "contains": ["user"],
-          "GET": "any",
-          "POST": "registered_user"
+          "GET": "registered_user",
+          "LINK": "registered_user"
         }
       }
     },
