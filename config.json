@@ -512,7 +512,7 @@
         },
         "offended": {
           "contains": ["user"],
-          "GET": "admin_role",
+          "GET": "any",
           "POST": "registered_user"
         }
       }
