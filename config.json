@@ -237,7 +237,8 @@
         "posts": {
           "contains": ["post"],
           "GET": "any",
-          "POST": "self"
+          "POST": "self",
+          "DELETE": "admin_role"
         },
         "timeline": {
           "contains": ["post"],
